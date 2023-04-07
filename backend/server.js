@@ -18,18 +18,18 @@ const { listenerCount } = require('stream');
 const dbConn = require('./dbConn');
 const pool = dbConn.getPool();
 
-app.get('/api/shoes', (req, res) => {
+app.get('/api/shoes', (req, res, next) => {
     pool.query('SELECT * FROM shoes', (err, result) => {
         if (err){
             res.status(404).send(err)
         } else {
-            const shoes = result.rows;
-            response.status(200).send(shoes);
+            const stuff = result.rows;
+            res.status(200).send(stuff);
         }
     })
 })
 
-app.get('/api/shoes/:id', (req, res) =>{
+app.get('/api/shoes/:id', (req, res, next) =>{
     const id = Number.parseInt(req.params.id);
 
     pool.query('SELECT * FROM shoes WHERE id=$1', [id], (err, result) => {
@@ -42,8 +42,9 @@ app.get('/api/shoes/:id', (req, res) =>{
     })
 })
 
-app.get('/api/review', (req, res) => {
-    pool.query('SELECT review.*, shoe.name AS shoe_name FROM review INNER JOIN shoes ON review.shoes_id = shoes.id;', (err, result) => {
+//Query provides an extra column on return of query, column 'shoes_name' which is pulled from parent table 'shoes'
+app.get('/api/review', (req, res, next) => {
+    pool.query('SELECT review.*, shoes.name AS shoes_name FROM review INNER JOIN shoes ON review.review_id = shoes.id;', (err, result) => {
         if (err) {
             res.status(404).send(err);
         } else {
@@ -53,7 +54,7 @@ app.get('/api/review', (req, res) => {
     })
 })
 
-app.get('/api/review/:id', (req, res) => {
+app.get('/api/review/:id', (req, res, next) => {
     const id = Number.parseInt(req.params.id);
 
     pool.query('SELECT * FROM review WHERE id=$1', [id], (err, result) => {
@@ -66,7 +67,7 @@ app.get('/api/review/:id', (req, res) => {
     })
 })
 
-app.get('/api/:word', (req, res) => {
+app.get('/api/:word', (req, res, next) => {
     const word = req.params.word;
     res.status(405).send(`NOT FOUND!! - 405 ERROR - /api/${word}/ DOES NOT EXIST`)
 })

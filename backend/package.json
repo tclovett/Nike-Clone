@@ -4,8 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "dev": "nodemon server.js",
     "migrate": "node migration.js",
     "seed": "node seed.js"
+    
   },
   "author": "",
   "license": "ISC",
