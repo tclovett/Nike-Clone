@@ -4,39 +4,64 @@
 }
 
 .Footer {
-  width: 100vw;
+  width: 89.5%;
   height: 347px;
   background-color: rgb(17, 17, 17);
   color: white;
-  padding: 40px 40px 0 40px;
+  padding: 40px 80px 0px 80px;
   display: flex;
   flex-direction: column;
+  /* border: 1px solid green; */
 }
 
 #footer-top {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  /* border: 1px solid red; */
+}
+
+#footer-top-left {
+  display: flex;
+  flex-direction: row;
+  gap: 5.6vw;
+}
+
+#footer-top-right {
+  /* border: 1px red solid; */
+  height: fit-content;
+  display: flex;
+  gap: 15px;
+}
+
+.socialSVGs {
+  /* border: 1px solid red; */
+  cursor: pointer;
+}
+.socialSVGs:hover {
 }
 
 .accordion-body {
   /* margin: 0px; */
-  padding: 5px;
+  /* padding: 5px; */
   display: flex;
   flex-direction: column;
   color: #fff;
   width: 170px;
   height: 230px;
   /* padding-top: 10px; */
-  gap: 0px;
-  justify-content: space-between;
+  gap: 20px;
+  /* justify-content: space-between; */
   /* border: 1px solid red; */
 }
 
 #get-help-section {
-  height: 196px;
+  height: auto;
+  gap: 15.3px;
 }
 #about-nike-section {
-  height: 165px;
+  height: auto;
+  gap: 15.3px;
 }
 
 .link-bold {
@@ -45,33 +70,39 @@
   font-weight: bolder;
   cursor: pointer;
   margin: 0px;
+  width: fit-content;
   /* border: 1px solid green; */
 }
 
 .link-gray {
   color: gray;
   font-size: 12px;
+  width: fit-content;
   margin: 0px;
+  cursor: pointer;
+  /* border: 1px solid red; */
   padding: 0px;
+}
+.link-gray:hover {
+  color: white;
 }
 
 #footer-bottom {
   display: flex;
   flex-direction: row;
   /* align-items: center; */
-  /* justify-content: flex-end; */
-  gap: 10vw;
-  height: 105px;
-  border: 1px solid red;
+  justify-content: space-between;
+  /* gap: 10vw; */
+  height: 120px;
+  /* border: 1px solid red; */
 }
 
 #loc-copy {
   display: flex;
   width: fit-content;
   height: fit-content;
-
   align-items: center;
-  margin: 10px;
+  margin: 80px 0px 0px 0px;
   gap: 18px;
   /* position: absolute; */
   /* bottom: -420px; */
@@ -95,6 +126,7 @@
 #curr-country {
   margin: 3px 8px;
   font-size: 12.5px;
+  cursor: pointer;
   /* border: #7e7e7e solid 1px; */
 }
 
@@ -106,7 +138,21 @@
 }
 
 #footer-bottom-right {
-  border: 1px solid red;
-  /* width: 500px; */
-  /* height: 100px; */
+  /* border: 1px solid red; */
+  width: 33.5vw;
+  height: 50px;
+  display: flex;
+  /* justify-content: space-between; */
+  gap: 25px;
+  flex-direction: column;
+  margin-top: 45px;
+}
+
+#f-bottom-right-top {
+  display: flex;
+  gap: 33.4px;
+}
+
+#f-bottom-right-bottom {
+  padding-left: 26.1vw;
 }

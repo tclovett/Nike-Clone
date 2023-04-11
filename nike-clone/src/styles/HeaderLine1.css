@@ -28,13 +28,9 @@
   justify-content: center;
   height: 100%;
   width: 48px;
+  cursor: pointer;
 }
 
-.nike-logo {
-  transform: scale(1.33);
-  height: 100%;
-  width: 15vw;
-}
 
 .branditems {
   display: flex;
@@ -43,6 +39,7 @@
   display: flex;
   justify-content: center;
   margin-left: 8px;
+  cursor: pointer;
 }
 .menuoption {
   display: flex;
@@ -64,4 +61,46 @@
   display: flex;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.dropdownHeader1 {
+  position: absolute;
+  background-color: white;
+  width: 230px;
+  height: 400px;
+  margin-top: 415px;
+  margin-left: -190px;
+  z-index: 3;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  pointer-events: none;
+  font-family: inherit;
+  font-size: 16px;
+}
+
+.dropdownHeader1.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.dropdownBar {
+  background: #f5f5f5;
+  width: 230px;
+  height: 10px;
+}
+.dropdownHelp {
+  padding-top: 20px;
+  padding-left: 15px;
+  cursor: pointer;
+}
+.dropdownOptions {
+  padding-top: 15px;
+}
+.dropdownOption {
+  color: #a5a5a5;
+  padding-top: 8px;
+  padding-left: 15px;
+  font-size: 15px;
+  cursor: pointer;
 }

@@ -5,6 +5,7 @@ const HeroThumbnails = (props) => {
     <div className="thumbnail-container">
       {props.testArr.map((image, index) => (
         <img
+          className="thumbnail"
           src={image}
           key={index}
           alt=""

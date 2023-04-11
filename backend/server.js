@@ -85,7 +85,7 @@ app.post('/api/shoes/', (req, res) => {
         return res.status(407).send("Error in post data or insufficient data provided for post route shoes")
     }
 
-    pool.query('INSERT INTO shoes (name, price, image, image_array, description, color_description, size_array) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING*;', [name, price, image, image_array, description, color_description, size_array], (err, result) => {
+    pool.query('INSERT INTO shoes (name, price, image, image_array, thumbnail_image_array, description, color_description, size_array) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING*;', [name, price, image, image_array, thumbnail_image_array, description, color_description, size_array], (err, result) => {
         if (err) {
             res.status(409).send(err);
         } else {
