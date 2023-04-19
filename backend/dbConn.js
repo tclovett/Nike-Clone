@@ -10,6 +10,7 @@ const POSTGRES_PASSWORD = process.env.POSTGRES_PASSWORD || 'password';
 const POSTGRES_USER = process.env.POSTGRES_USER || 'postgres';
 const DATABASE_URL = process.env.DATABASE_URL;
 
+
 function getPool(){
     //object with connection values we can pass to new Pool() to connect to DB:
     const dbConfig = {
@@ -17,7 +18,7 @@ function getPool(){
         host: POSTGRES_HOST,
         database: POSTGRES_DB,
         password: POSTGRES_PASSWORD,
-        port: 5432,
+        port: 6432,
     };
 
     //if DATABASE_URL is set as an environmental variable (from Render), use that
@@ -30,7 +31,7 @@ function getPool(){
                 rejectUnauthorized: false
             }
         })
-    } else {
+    } else {console.log(`creating new connection pool from ${dbConfig}`)
         pool = new Pool(dbConfig);
     }
     return pool;    
