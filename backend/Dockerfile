@@ -1,4 +1,4 @@
-FROM node:18.7.0
+FROM node:bullseye
 WORKDIR /frontend
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -6,6 +6,8 @@ WORKDIR /frontend
 COPY package*.json ./
 RUN npm install -g nodemon  
 RUN npm install
+RUN apt-get update && apt-get install -y netcat
+RUN npm install -g npm@9.6.4
 # Bundle app source and copy the files to the image
 COPY . .
 # Expose the post so programs outside Docker 

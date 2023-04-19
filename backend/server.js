@@ -5,18 +5,23 @@ dotenv.config();
 console.log(process.env);
 
 //SETUP DEPENDECIES:
-const express = require('express');
-const cors = require('cors');
-const { Pool } = require('pg');
-
 const app = express();
-const port = 8000;
 app.use(express.json());
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+const port = 8000;
 const { listenerCount } = require('stream');
 
-const dbConn = require('./dbConn');
-const pool = dbConn.getPool();
+// const dbConn = require('./dbConn');
+const pool = new Pool({
+    user: 'postgres',
+    host: 'db',
+    database: 'FEC',
+    password: 'password',
+    port: 5432
+});
 
 app.get('/api/shoes', (req, res, next) => {
     pool.query('SELECT * FROM shoes', (err, result) => {
@@ -130,8 +135,6 @@ app.post('/api/review/', (req, res) => {
         }
     })
 })
-
-
 //DELETE ROUTES (x2) - NOT NECESSARY
 //PATCH ROUTES (x2) - NOT NECESSARY
 
@@ -140,6 +143,6 @@ app.use(function(err, req, res, next){
 });
 
 
-app.listen(port, function(){
+app.listen(port, () => {
     console.log(`Service is running, listening on ${port}`);
 });
