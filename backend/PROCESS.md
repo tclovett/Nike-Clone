@@ -1,4 +1,4 @@
-1. SERVER -Start server.js by running 'node run dev' in a BASH temrinal in VSC (part of package.json "scripts")
+1. SERVER -Start server.js by running 'npm run dev' in a BASH temrinal in VSC (part of package.json "scripts")
 2. DOCKER - Launch Docker App
 3. DOCKER - In another BASH terminal in VSC, run command 'docker compose up' (make sure in project directory).
 4. DOCKER SHELL - Open up DOCKER shell from VSC 
