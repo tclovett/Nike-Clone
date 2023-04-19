@@ -1,5 +1,5 @@
 FROM node:18.7.0
-WORKDIR /Nike-Clone
+WORKDIR /frontend
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
@@ -14,4 +14,4 @@ EXPOSE 8000
 # When the image is finally run in a container, execute this:
 CMD [ "nodemon", "server.js" ]
 
-#RUN COMMAND "docker compose up -d"
+#RUN COMMAND "docker compose up"
