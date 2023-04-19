@@ -1,5 +1,6 @@
 'use strict';
 
+// Put .env configuration in preparation for deployed version
 const dotenv = require('dotenv');
 dotenv.config();
 console.log(process.env);
@@ -14,7 +15,6 @@ app.use(bodyParser.json());
 const port = 8000;
 const { listenerCount } = require('stream');
 
-// const dbConn = require('./dbConn');
 const pool = new Pool({
     user: 'postgres',
     host: 'db',
