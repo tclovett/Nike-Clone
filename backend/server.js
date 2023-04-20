@@ -1,5 +1,11 @@
 'use strict';
 
+const express = require('express');
+const { Pool } = require('pg');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
+
 // Put .env configuration in preparation for deployed version
 const dotenv = require('dotenv');
 dotenv.config();
