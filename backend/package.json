@@ -2,14 +2,12 @@
   "name": "fec",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "express.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "migrate": "node migration.js",
-    "seed": "node seed.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
     
   },
-  "author": "",
+  "author": "Kevin Foreman",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
