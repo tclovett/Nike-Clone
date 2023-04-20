@@ -18,7 +18,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const port = 8000;
+const PORT = process.env.PORT || 8000;
 const { listenerCount } = require('stream');
 
 const pool = new Pool({
@@ -149,6 +149,6 @@ app.use(function(err, req, res, next){
 });
 
 
-app.listen(port, () => {
-    console.log(`Service is running, listening on ${port}`);
+app.listen(PORT, () => {
+    console.log(`Service is running, listening on ${PORT}`);
 });
