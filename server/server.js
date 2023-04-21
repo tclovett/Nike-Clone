@@ -1,25 +1,31 @@
 'use strict';
 
-const express = require('express');
-const { Pool } = require('pg');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+// Set up for use with Redis inside AWS ElastiCache cluster
+import redis from 'redis';
+const redisHost = process.env.REDIS_HOST || 'localhost';
+const redisPort = process.env.REDIS_PORT || 63797;
+const client = redis.createClient(redisPort, redisHost);
+
+import express, { json } from 'express';
+import { Pool } from 'pg';
+import cors from 'cors';
+import { urlencoded, json as _json } from 'body-parser';
 
 
 // Put .env configuration in preparation for deployed version
-const dotenv = require('dotenv');
-dotenv.config();
+import { config } from 'dotenv';
+config();
 console.log(process.env);
 
 //SETUP DEPENDECIES:
 const app = express();
-app.use(express.json());
+app.use(json());
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(urlencoded({ extended: false }));
+app.use(_json());
 
 const PORT = process.env.PORT || 8000;
-const { listenerCount } = require('stream');
+import { listenerCount } from 'stream';
 
 const pool = new Pool({
     user: 'postgres',
