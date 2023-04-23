@@ -12,6 +12,9 @@ services:
     environment:
       - DATABASE_URL=postgres://postgres:password@db:5432/FEC
     command: sh -c 'until nc -z db 5432; do sleep 1; done; npm start'
+    networks:
+      - default
+      - monitoring
 
   db:
     image: postgres:latest
@@ -25,6 +28,8 @@ services:
       - "5432:5432"
     volumes:
       - ./db:/docker-entrypoint-initdb.d
+    networks:
+      - default
 
   pgadmin:
     image: dpage/pgadmin4
@@ -36,6 +41,8 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=password
       - PGADMIN_LISTEN_PORT=80
       - PGADMIN_SKIP_NATIVE_AUTH=true
+    networks:
+      - default
 
   seed:
     build: .
@@ -46,6 +53,30 @@ services:
     environment:
       - DATABASE_URL=postgres://postgres:password@db:5432/FEC
     command: sh -c 'until nc -z db 5432; do sleep 1; done'
+    networks:
+      - default
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - monitoring
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - prometheus-config:/etc/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
 
 volumes:
     db-data:
+    prometheus-config:
