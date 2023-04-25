@@ -17,6 +17,10 @@ const { listenerCount } = require('stream');
 
 const dbConn = require('./dbConn');
 const pool = dbConn.getPool();
+// addition to serve static images from public folder
+const path = require('path')
+app.use('/public/images', express.static(path.join(__dirname, 'public')))
+
 
 app.get('/api/shoes', (req, res, next) => {
     pool.query('SELECT * FROM shoes', (err, result) => {
