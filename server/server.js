@@ -58,7 +58,7 @@ const DEFAULT_EXPIRATION = 3600;
 // });
 
 // New Route
-console.log('Redis client status:', redisClient.status);
+// console.log('Redis client status:', redisClient.status);
 app.get('/api/shoes', (req, res, next) => {
     redisClient.get('shoes', (error, shoes) => {
         if (error) {
