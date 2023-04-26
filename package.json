@@ -8,5 +8,8 @@
     "prestart": "npm run build --prefix frontend"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "redis": "^4.6.5"
+  }
 }

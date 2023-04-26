@@ -9,6 +9,7 @@ services:
     depends_on:
       - db
       - seed
+      - redis
     environment:
       - DATABASE_URL=postgres://postgres:password@db:5432/FEC
     command: sh -c 'until nc -z db 5432; do sleep 1; done; npm start'
@@ -30,6 +31,12 @@ services:
       - ./db:/docker-entrypoint-initdb.d
     networks:
       - default
+      
+  redis:
+    image: redis:6
+    restart: always
+    ports:
+      - "6379:6379"
 
   pgadmin:
     image: dpage/pgadmin4
