@@ -45,25 +45,18 @@ const pool = new Pool({
 });
 
 const DEFAULT_EXPIRATION = 3600;
-// OLD route
+// Old route for testing differences with k6
 // app.get('/api/shoes', (req, res, next) => {
-//     redisClient.get('shoes', (error, shoes) => {
-//         if (error) console.error(error)
-//         if (shoes != null) {
-//             return res.json(JSON.parse(shoes))
+//     pool.query('SELECT * FROM shoes', (err, result) => {
+//         if (err){
+//             res.status(404).send(err)
 //         } else {
-//             pool.query('SELECT * FROM shoes', (err, result) => {
-//                 if (err){
-//                     res.status(404).send(err)
-//                 } else {
-//                     const data = result.rows;
-//                     redisClient.setEx('shoes', DEFAULT_EXPIRATION, JSON.stringify(data));
-//                     res.status(200).send(data);
-//                 }
-//             })
+//             const stuff = result.rows;
+//             res.status(200).send(stuff);
 //         }
 //     })
-// })
+// });
+
 // New Route
 console.log('Redis client status:', redisClient.status);
 app.get('/api/shoes', (req, res, next) => {
