@@ -8,7 +8,7 @@ import pkg from 'pg';
 import express from 'express';
 import cors from 'cors';
 import Redis from 'ioredis';
-
+import axios from 'axios';
 const redisClient = new Redis({
     host: 'redis',
     port: 6379,
@@ -24,6 +24,7 @@ redisClient.on('connect', () => {
 
 // Put .env configuration in preparation for deployed version
 import { config } from 'dotenv';
+// import { get } from 'jquery';
 config();
 // console.log(process.env);
 
@@ -58,14 +59,13 @@ const DEFAULT_EXPIRATION = 3600;
 // });
 
 // New Route
-// console.log('Redis client status:', redisClient.status);
 app.get('/api/shoes', (req, res, next) => {
     redisClient.get('shoes', (error, shoes) => {
         if (error) {
             console.error(error);
             return res.status(500).send('Error retrieving shoes from cache');
         }
-        
+
         if (shoes != null) {
             try {
                 const parsedShoes = JSON.parse(shoes);
@@ -93,11 +93,31 @@ app.get('/api/shoes', (req, res, next) => {
     });
 });
 
+// Test function to verify Redis is up and running
+app.get("/photos", async (req, res) => {
+    const albumId = req.query.albumId
+    redisClient.get('photos', async (error, photos) => {
+        if (error) console.error(error)
+        if (photos != null) {
+            console.log('Cache Hit')
+            return res.json(JSON.parse(photos))
+        } else {
+            console.log('Cache Miss')
+            const { data } = await axios.get(
+                "https://jsonplaceholder.typicode.com/photos",
+                { params: { albumId } }
+            )
+            redisClient.setex('photos', DEFAULT_EXPIRATION, JSON.stringify(data));
+            res.json(data);
+        }
+    })
+});
 
-app.get('/api/shoes/:id', (req, res, next) =>{
+
+app.get('/api/shoes/:id', (req, res, next) => {
     const id = Number.parseInt(req.params.id);
     pool.query('SELECT * FROM shoes WHERE id=$1', [id], (err, result) => {
-        if (err){
+        if (err) {
             res.status(404).send(err);
         } else {
             const shoe = result.rows;
@@ -106,10 +126,10 @@ app.get('/api/shoes/:id', (req, res, next) =>{
     })
 })
 
-app.get('/api/shoeid/:id', (req, res, next) =>{
+app.get('/api/shoeid/:id', (req, res, next) => {
     const id = Number.parseInt(req.params.id);
     pool.query('SELECT * FROM shoes WHERE shoeid=$1', [id], (err, result) => {
-        if (err){
+        if (err) {
             res.status(404).send(err);
         } else {
             const shoe = result.rows;
@@ -126,7 +146,7 @@ app.get('/api/review', (req, res, next) => {
             res.status(404).send(err);
         } else {
             const reviews = result.rows;
-            res.status(200).send(reviews); 
+            res.status(200).send(reviews);
         }
     })
 })
@@ -135,7 +155,7 @@ app.get('/api/review/:id', (req, res, next) => {
     const id = Number.parseInt(req.params.id);
 
     pool.query('SELECT * FROM review WHERE review_id=$1', [id], (err, result) => {
-        if (err){
+        if (err) {
             res.status(404).send(err)
         } else {
             const review = result.rows;
@@ -160,7 +180,7 @@ app.post('/api/shoes/', (req, res) => {
     const style = req.body.style;
     const size_array = req.body.size_array;
 
-    if (!name || !price || !gender || !image || !image_array || !description || !color_description || !style || !size_array){
+    if (!name || !price || !gender || !image || !image_array || !description || !color_description || !style || !size_array) {
         return res.status(407).send("Error in post data or insufficient data provided for post route shoes")
     }
 
@@ -182,7 +202,7 @@ app.post('/api/review/', (req, res) => {
     const date_created = req.body.date_created;
     const summary = req.body.summary;
 
-    if (!review_id || !title || !stars || !user_name || !date_created || !summary){
+    if (!review_id || !title || !stars || !user_name || !date_created || !summary) {
         return res.status(408).send("Error in post data or insufficient data provided for post route review")
     }
 
@@ -198,7 +218,7 @@ app.post('/api/review/', (req, res) => {
 //DELETE ROUTES (x2) - NOT NECESSARY
 //PATCH ROUTES (x2) - NOT NECESSARY
 
-app.use(function(err, req, res, next){
+app.use(function (err, req, res, next) {
     res.status(404).send("ERROR 404 ('MIDDLEWARE') - THERE WAS A PROBLEM", err);
 });
 
