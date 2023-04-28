@@ -18,12 +18,13 @@ Clone of a retail product page, inherited from a group of colleagues. Tasked wit
 
 ## Installation
 1. Fork/clone the repository to your local machine
-2. Make sure you have Docker installed to run the backend
-3. Navigate to the server folder and run 'docker compose up --build'
-4. Verify the docker containers/images/volumes are built, and the servers are running, and waiting for connections
-5. Run 'redis-cli' in a new terminal to verify the connection to Redis
-6. Run 'keys *' to check whether the database has been cached *Note: you will not see the data in the cache until you have made at lease 1 call to the endpoint, you can do this by using sending a GET request through Postman, or Insomnia to localhost:8000/api/shoes
-7. To view the application in your local browser, navigate to the client directory in a new terminal and run 'npm run start'
+2. From the root directory, inside the server directory, and inside the client directory run 'npm install' (3 times total)
+3. Make sure you have Docker installed and running to run the backend
+4. Navigate to the server folder and run 'docker compose up --build'
+5. Verify the docker containers/images/volumes are built, and the servers are running, and waiting for connections
+6. Run 'redis-cli' in a new terminal to verify the connection to Redis
+7. Run 'keys *' to check whether the database has been cached *Note: you will not see the data in the cache until you have made at lease 1 call to the endpoint, you can do this by using sending a GET request through Postman, or Insomnia to localhost:8000/api/shoes
+8. To view the application in your local browser, navigate to the client directory in a new terminal and run 'npm run start'
 
 ## Technologies
 1. PostgreSQL
