@@ -3,17 +3,17 @@ import { check, sleep } from 'k6';
 
 export const options = {
     duration: '1m',
-    vus: 100,
+    vus: 50,
 };
 
 function apiEndpoint1() {
     let response = http.get('http://localhost:8000/photos');
-    console.log(`Endpoint 1 status: ${response.status}`);
+    // console.log(`Endpoint 1 status: ${response.status}`);
 };
 
 function apiEndpoint2() {
     let response = http.get('http://localhost:8000/api/shoes');
-    console.log(`Endpoint 2 status: ${response.status}`);
+    // console.log(`Endpoint 2 status: ${response.status}`);
 };
 
 export default function firstTest() {
