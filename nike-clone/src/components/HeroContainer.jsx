@@ -12,7 +12,7 @@ const HeroContainer = (props) => {
     fetch('http://localhost:8000/api/shoes/1')
       .then((res) => res.json())
       .then((data) => {
-        props.setFocusedImage(data[0].image);
+        props.setFocusedImage(data[0].image + '/focused');
         props.setThumbnailImages(data[0].image_array);
         props.setSizeArray(data[0].size_array);
         props.setPrice(data[0].price);
