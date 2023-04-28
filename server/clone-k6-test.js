@@ -3,7 +3,7 @@ import { check, sleep } from 'k6';
 
 export const options = {
     duration: '1m',
-    vus: 50,
+    vus: 1000,
 };
 
 function apiEndpoint1() {
