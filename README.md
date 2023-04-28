@@ -6,7 +6,7 @@
 # Nike Clone
 
 ## Description
-Clone of a retail product page, inherited from a group of colleagues. Tasked with optimizing the application and to make the application ready to scale both users and data served.
+Clone of a retail product page, inherited from a group of colleagues. Tasked with optimizing the application and to make the application ready to scale both users and data served. Integrated a Redis caching layer to reduce the time it takes to get data from the database to the user. Caching layer resulted in ~50% faster response.
 
 ## Table of Contents
 * [Installation](#installation)
