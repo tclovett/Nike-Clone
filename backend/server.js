@@ -14,9 +14,21 @@ const port = 8000;
 app.use(express.json());
 app.use(cors());
 const { listenerCount } = require('stream');
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+  });
+  
+  app.use(cors());
 
 const dbConn = require('./dbConn');
 const pool = dbConn.getPool();
+// addition to serve static images from public folder
+const path = require('path')
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+
 
 app.get('/api/shoes', (req, res, next) => {
     pool.query('SELECT * FROM shoes', (err, result) => {

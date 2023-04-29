@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "nodemon server.js",
     "migrate": "node migration.js",
-    "seed": "node seed.js"
-    
+    "seed": "node seed.js",
+    "webp": "simple-webp-converter"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +19,7 @@
     "jquery": "^3.6.4",
     "nodemon": "^2.0.22",
     "pg": "^8.10.0",
-    "pool": "^0.4.1"
+    "pool": "^0.4.1",
+    "simple-webp-converter": "^1.0.3"
   }
 }
